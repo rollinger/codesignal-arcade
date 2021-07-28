@@ -55,7 +55,7 @@ def almostIncreasingSequence_2(sequence):
 			return True
 	return False
 
-def almostIncreasingSequence(sequence):
+def almostIncreasingSequence_3(sequence):
 	# Brute Force
 	def copy(seq):
 		r = seq[::]
@@ -75,6 +75,27 @@ def almostIncreasingSequence(sequence):
 			return True
 	return False
 
+def almostIncreasingSequence(sequence):
+	def is_ascending(seq):
+		print(seq)
+		for i in range(0, len(seq)-1):
+			if seq[i] >= seq[i+1]:
+				return (False)
+		return (True)
+
+	if len(sequence) <= 2:
+		return True
+	for i in range(0, len(sequence)-1):
+		if sequence[i] >= sequence[i+1]:
+			test = sequence[:]
+			#print("%d > %d %s"%(sequence[i],sequence[i+1],test))
+			if i > 0 and sequence[i+1] <= sequence[i-1]:
+				del test[i+1]
+			else:
+				del test[i]
+			return is_ascending(test)
+	return (True)
+
 
 if __name__ == "__main__":
 	def test(value, expect):
@@ -93,3 +114,6 @@ if __name__ == "__main__":
 	test([40, 50, 60, 10, 20, 30], False)
 	test([1, 2, 5, 3, 5], True)
 	test([1, 2, 3, 4, 99, 5, 6], True)
+	test([1, 2, 3, 4, 3, 6], True)
+	test([3, 5, 67, 98, 3], True)
+	test([1, 1, 2, 3, 4, 4], False)
