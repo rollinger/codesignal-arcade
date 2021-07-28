@@ -8,9 +8,18 @@ if a0 < a1 < ... < an. Sequence containing only one element is also
 considered to be strictly increasing.
 """
 def matrixElementsSum(matrix):
-	sum = 1
-	return sum
-
+	def matrix_transform(matrix):
+		idx_blk = []
+		for i in range(0, len(matrix)):
+			for j in range(0, len(matrix[0])):
+				#print(matrix[i][j])
+				if matrix[i][j] == 0:
+					idx_blk.append(j)
+				if j in idx_blk:
+					matrix[i][j] = 0
+		return matrix
+	transform = matrix_transform(matrix)
+	return sum(map(sum,transform))
 
 if __name__ == "__main__":
 	def test(value, expect):
@@ -23,6 +32,10 @@ if __name__ == "__main__":
 	matrix = 	[[0, 1, 1, 2], 
         		[0, 5, 0, 0], 
           		[2, 0, 3, 3]]
+	test(matrix, 9)
+	matrix = [[1, 1, 1, 0], 
+          [0, 5, 0, 1], 
+          [2, 1, 3, 10]]
 	test(matrix, 9)
 	"""
 	test([1, 3, 2, 1], False)
