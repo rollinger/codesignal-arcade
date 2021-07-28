@@ -1,5 +1,5 @@
 """
-Given two strings, find the number of common characters between them.
+sum of both halves is equal
 """
 def isLucky(n):
 	nl = list(map(int, str(n)))
