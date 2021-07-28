@@ -7,7 +7,7 @@ Note: sequence a0, a1, ..., an is considered to be a strictly increasing
 if a0 < a1 < ... < an. Sequence containing only one element is also
 considered to be strictly increasing.
 """
-def almostIncreasingSequence(sequence):
+def almostIncreasingSequence_0(sequence):
 	if len(sequence) <= 2:
 		return True
 
@@ -27,7 +27,7 @@ def almostIncreasingSequence(sequence):
 			test_seq2 = sequence[:i+1] + sequence[i+2:]
 			return increase(test_seq1) or increase(test_seq2)
 
-def OLDalmostIncreasingSequence(sequence):
+def almostIncreasingSequence_1(sequence):
 	ascSeq = []; seq = sequence;
 	ascSeq.append(min(sequence[:2]))
 	if (len(sequence) >= 2 and sequence[:2][0] > sequence[:2][1]):
@@ -35,13 +35,46 @@ def OLDalmostIncreasingSequence(sequence):
 	for i in seq:
 		if ascSeq[-1] < i:
 			ascSeq.append(i)
-
-	print(sequence)
-	print(ascSeq)
-
 	if (len(sequence) - len(ascSeq)) > 1:
 		return (False)
 	return (True)
+
+def almostIncreasingSequence_2(sequence):
+	def is_ascending(seq):
+		for i in range(0, len(seq)-1):
+			if seq[i] >= seq[i+1]:
+				return (False)
+		return (True)
+
+	if is_ascending(sequence) or len(sequence) <= 2:
+		return True
+	for d in range(0, len(sequence)):
+		test = sequence.copy()
+		del test[d]
+		if is_ascending(test):
+			return True
+	return False
+
+def almostIncreasingSequence(sequence):
+	# Brute Force
+	def copy(seq):
+		r = seq[::]
+		return r
+	def is_ascending(seq):
+		for i in range(0, len(seq)-1):
+			if seq[i] >= seq[i+1]:
+				return (False)
+		return (True)
+
+	if is_ascending(sequence) or len(sequence) <= 2:
+		return True
+	for d in range(0, len(sequence)):
+		test = copy(sequence)
+		del test[d]
+		if is_ascending(test):
+			return True
+	return False
+
 
 if __name__ == "__main__":
 	def test(value, expect):
