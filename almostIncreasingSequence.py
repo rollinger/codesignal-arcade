@@ -8,6 +8,26 @@ if a0 < a1 < ... < an. Sequence containing only one element is also
 considered to be strictly increasing.
 """
 def almostIncreasingSequence(sequence):
+	if len(sequence) <= 2:
+		return True
+
+	def increase(test):
+		if len(test) == 2:
+			return test[0] < test[1]
+
+		else:
+			for i in range(0, len(test)-1):
+				if test[i] >= test[i+1]:
+					return False
+			return True
+
+	for i in range (0, len(sequence) - 1):
+		if sequence[i] >= sequence [i+1]:
+			test_seq1 = sequence[:i] + sequence[i+1:]
+			test_seq2 = sequence[:i+1] + sequence[i+2:]
+			return increase(test_seq1) or increase(test_seq2)
+
+def OLDalmostIncreasingSequence(sequence):
 	ascSeq = []; seq = sequence;
 	ascSeq.append(min(sequence[:2]))
 	if (len(sequence) >= 2 and sequence[:2][0] > sequence[:2][1]):
@@ -15,6 +35,10 @@ def almostIncreasingSequence(sequence):
 	for i in seq:
 		if ascSeq[-1] < i:
 			ascSeq.append(i)
+
+	print(sequence)
+	print(ascSeq)
+
 	if (len(sequence) - len(ascSeq)) > 1:
 		return (False)
 	return (True)
