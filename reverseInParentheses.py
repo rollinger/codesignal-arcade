@@ -5,24 +5,25 @@ in the input string.
 Input strings will always be well-formed with matching ()s.
 """
 def reverseInParentheses(inputString):
-	def reverse(str, open, close):
-		lstr = str[0:open-1]
+	def reverse(str, open, close):	
+		lstr = str[:open]
 		rstr = str[close+1:]
-		rev = str[open+1:close-1][::-1]
+		rev = str[open+1:close][::-1]
 		return ''.join([lstr,rev,rstr])
 	def token(inputString):
-		open = None; close = None;
+		open = None; close = None
 		for i,v in enumerate(inputString):
 			if v == '(':
 				open = i
 			elif v == ')':
 				close = i
 				break
-		inputString = reverse(inputString,open,close)
+		if open >= 0 and close >= 0:
+			inputString = reverse(inputString,open,close)
+			#print("%s %s = %s"%(open,close, inputString))
 		if '(' in list(inputString):
-			token(inputString)
-		else:
-			return inputString
+			inputString = token(inputString)
+		return inputString
 	return (token(inputString))
 
 
