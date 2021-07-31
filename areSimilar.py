@@ -11,7 +11,6 @@ def areSimilar(a, b):
 		swap = [i for i, v in enumerate(l) if v == False]
 		a[swap[0]], a[swap[1]] = a[swap[1]], a[swap[0]]
 		l = [x == y for x,y in zip(a,b)]
-		print(l)
 		return l.count(False) == 0
 	else:
 		return True 
