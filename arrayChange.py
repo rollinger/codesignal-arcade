@@ -9,10 +9,12 @@ def arrayChange(inputArray):
 	moves = 0
 	maximum = transform[0]
 	for i in range(1,len(inputArray)):
+		# Fast implementation
 		if transform[i] <= maximum:
 			moves += maximum + 1 - transform[i]
 			transform[i] = maximum + 1
 		"""
+		# Slow implementation
 		while transform[i] <= maximum:
 			print(transform)
 			transform[i] += 1
