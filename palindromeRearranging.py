@@ -21,7 +21,7 @@ def palindromeRearranging(inputString):
 				return False
 		return True
 	map = charHash(inputString)
-	print(map)
+	#print(map)
 	return ispotentialPalindrome(map)
 
 if __name__ == "__main__":
